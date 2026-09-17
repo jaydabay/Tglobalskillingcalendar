@@ -733,42 +733,36 @@ function renderMetrics(){
 
   const monthStart=new Date(state.year,state.month,1);
   const monthEnd=new Date(state.year,state.month+1,0);
-  let totalOccurrences=0;
+  let totalUniqueEvents=0;
 
   Object.entries(categoryColors).forEach(([cat,color])=>{
-    let count=0;
-
-    events.forEach(e=>{
-      if(e.category!==cat || !e.start) return;
+    // KPI cards count UNIQUE events for the displayed month.
+    // A multi-day event counts once, as long as any part of it overlaps the month.
+    const count=events.filter(e=>{
+      if(e.category!==cat || !e.start) return false;
 
       const eventStart=parseLocal(e.start);
       const eventEnd=parseLocal(e.end || e.start);
 
-      // Count each calendar day the event appears within the displayed month.
-      const rangeStart=eventStart>monthStart ? eventStart : monthStart;
-      const rangeEnd=eventEnd<monthEnd ? eventEnd : monthEnd;
+      return eventStart<=monthEnd && eventEnd>=monthStart;
+    }).length;
 
-      if(rangeStart<=rangeEnd){
-        count += Math.floor((rangeEnd-rangeStart)/86400000)+1;
-      }
-    });
-
-    totalOccurrences += count;
+    totalUniqueEvents += count;
 
     const active=state.active.has(cat);
     const b=document.createElement('button');
     b.className='metric '+(active?'active':'');
     b.style.setProperty('--c',color);
     b.setAttribute('aria-pressed',String(active));
-    b.setAttribute('aria-label',`${active?'Hide':'Show'} ${cat}, ${count} event occurrences in ${title.textContent || new Date(state.year,state.month,1).toLocaleDateString(undefined,{month:'long',year:'numeric'})}`);
+    b.setAttribute('aria-label',`${active?'Hide':'Show'} ${cat}, ${count} unique events in ${title.textContent || new Date(state.year,state.month,1).toLocaleDateString(undefined,{month:'long',year:'numeric'})}`);
     const cardLabel = cat === 'Product Launch' ? 'Product Launches' : cat;
     b.innerHTML=`<strong>${count}</strong><span>${cardLabel}</span>`;
     b.onclick=()=>toggleCategory(cat);
     box.appendChild(b);
   });
 
-  // Top Total Events card is static and always reflects all event records in the dataset.
-  document.getElementById('totalCount').textContent=events.length;
+  // Top Total Events card follows the same UNIQUE-event monthly logic.
+  document.getElementById('totalCount').textContent=totalUniqueEvents;
 }
 
 function toggleCategory(cat){
