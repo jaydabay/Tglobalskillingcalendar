@@ -1,36 +1,1144 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Global Skilling Field Calendar</title>
 <style>
-:root{--navy:#202a66;--ink:#16213e;--muted:#667085;--line:#dce3ef;--surface:#fff;--bg:#f5f7fb;--shadow:0 16px 50px rgba(22,33,62,.14)}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Arial,sans-serif}
-button,input{font:inherit}.app{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) 360px}.main{padding:24px;min-width:0}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:18px}.brand{display:flex;gap:14px;align-items:center}.badge{height:42px;width:42px;border-radius:50%;display:grid;place-items:center;background:#08765e;color:#fff;font-weight:800}.title h1{font:700 25px Georgia,serif;margin:0;color:#20245d}.title p{margin:5px 0 0;color:var(--muted);font-size:13px}.toolbar{background:var(--navy);color:#fff;border-radius:8px 8px 0 0;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px}.nav,.view{display:flex;align-items:center;gap:8px}.toolbar button{border:0;color:#fff;background:#3b478c;border-radius:5px;padding:8px 11px;cursor:pointer}.toolbar button:hover,.toolbar button:focus{background:#5361aa;outline:2px solid #fff;outline-offset:1px}.month-title{font-weight:700;min-width:150px}.filters{display:flex;justify-content:flex-end;background:#fff;padding:10px 13px;border:1px solid var(--line);border-top:0}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;display:flex;align-items:center;gap:7px;cursor:pointer}.chip.off{opacity:.42;text-decoration:line-through}.dot{width:10px;height:10px;border-radius:50%}.search{margin-left:auto;min-width:230px;border:1px solid var(--line);border-radius:7px;padding:8px 10px}.calendar{background:#fff;border:1px solid var(--line);border-top:0}.weekdays,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}.weekday{padding:9px;text-align:center;font-size:12px;color:#475467;background:#f8f9fc;border-right:1px solid var(--line)}.weekday:last-child{border-right:0}.day{min-height:132px;border-top:1px solid var(--line);border-right:1px solid var(--line);padding:6px;overflow:hidden}.day:nth-child(7n){border-right:0}.day.out{background:#fafbfc;color:#98a2b3}.date{font-size:12px;margin-bottom:5px;display:flex;align-items:center;justify-content:space-between}.today .date span:first-child{background:var(--navy);color:#fff;width:24px;height:24px;border-radius:50%;display:grid;place-items:center}.event{display:block;width:100%;text-align:left;border:0;border-left:4px solid var(--event);background:linear-gradient(90deg,color-mix(in srgb,var(--event) 18%,white),color-mix(in srgb,var(--event) 7%,white));color:#19213d;border-radius:4px;margin:4px 0;padding:5px 6px;font-size:11px;line-height:1.25;cursor:pointer;overflow:hidden}.event:hover{filter:brightness(.96);transform:translateY(-1px)}.more{font-size:11px;color:#475467;padding:3px}.side{background:#fff;border-left:1px solid var(--line);padding:24px;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(34,49,90,.05)}.side h2{font-size:20px;margin:0 0 6px}.side .hint{color:var(--muted);font-size:13px;margin-bottom:18px}.panel-empty{margin:auto 0;text-align:center;color:#7a8497}.detail{display:none}.detail.open{display:block}.pill{display:inline-flex;color:white;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:600;margin:8px 0 18px}.detail h3{font-size:22px;margin:0 0 16px}.meta{border-top:1px solid var(--line)}.row{padding:13px 0;border-bottom:1px solid var(--line)}.label{font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.06em}.value{margin-top:4px;font-size:14px}.link{display:inline-block;margin-top:18px;background:var(--navy);color:#fff;text-decoration:none;padding:10px 14px;border-radius:6px}.close{align-self:flex-end;border:0;background:#eef1f7;border-radius:50%;width:34px;height:34px;cursor:pointer}.status{padding:8px 12px;background:#eef4ff;color:#344054;font-size:12px;border-top:1px solid var(--line)}
-.hero{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 26px;margin-bottom:14px;border-radius:16px;color:#fff;background:linear-gradient(120deg,#23266b 0%,#5a2b90 38%,#0078d4 72%,#00a4a6 100%);box-shadow:0 14px 32px rgba(35,38,107,.18);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-65px;top:-115px;background:rgba(255,255,255,.12)}.hero h2{margin:4px 0 7px;font-size:27px}.hero p{margin:0;color:rgba(255,255,255,.86);font-size:13px}.eyebrow{font-size:10px;letter-spacing:.16em;font-weight:800;color:#d9ecff}.hero-total{z-index:1;min-width:120px;text-align:center;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(5px);padding:14px 18px;border-radius:14px}.hero-total span{display:block;font-size:34px;font-weight:800}.hero-total small{color:#fff}.metrics{display:grid;grid-template-columns:repeat(6,minmax(125px,1fr));gap:9px;margin-bottom:14px}.metric{border:0;background:#fff;border-radius:12px;padding:12px;text-align:left;box-shadow:0 4px 13px rgba(22,33,62,.07);cursor:pointer;position:relative;overflow:hidden;border-top:4px solid var(--c)}.metric:before{content:"";position:absolute;width:55px;height:55px;border-radius:50%;right:-20px;bottom:-22px;background:var(--c);opacity:.1}.metric strong{display:block;font-size:23px;color:#20245d}.metric span{display:block;font-size:11px;color:#667085;line-height:1.25;margin-top:3px}.metric.active{box-shadow:0 0 0 2px var(--c),0 7px 20px rgba(22,33,62,.12)}.metric:hover{transform:translateY(-2px)}
-@media(max-width:1100px){.metrics{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:980px){.app{grid-template-columns:1fr}.side{position:fixed;inset:0 0 0 auto;width:min(380px,92vw);z-index:10;transform:translateX(100%);transition:.25s;box-shadow:var(--shadow)}.side.show{transform:none}.main{padding:14px}.day{min-height:105px}.search{order:10;width:100%;margin-left:0}.filters{gap:6px}}
-@media(max-width:650px){.main{padding:8px}.top{margin-bottom:10px}.hero{padding:18px 16px;border-radius:12px;align-items:flex-start}.hero h2{font-size:21px}.hero p{max-width:240px}.hero-total{min-width:78px;padding:10px}.hero-total span{font-size:28px}.metrics{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 1px 8px;gap:8px}.metric{min-width:145px;scroll-snap-align:start}.filters{overflow-x:auto;flex-wrap:nowrap;padding:9px}.chip{min-width:max-content}.search{min-width:190px}.calendar{overflow:hidden}.top{flex-direction:column}.weekday{font-size:10px;padding:7px 2px}.day{min-height:88px;padding:3px}.event{font-size:0;padding:5px;border-left-width:5px}.event:after{content:'';display:block;height:4px}.toolbar{flex-wrap:wrap}.view{display:none}}
-</style></head>
-<body><div class="app"><main class="main">
-<header class="top"><div class="brand"><div class="badge">GS</div><div class="title"><h1>Global Skilling Field Calendar</h1><p>Explore flagship, competitive, product, and skilling content moments in one interactive view.</p></div></div></header>
-<section class="hero"><div><div class="eyebrow">GLOBAL SKILLING • FIELD INTELLIGENCE</div><h2>Moments that matter, at a glance</h2><p>Track the event landscape across Microsoft, competitive moments, product launches and skilling content releases.</p></div><div class="hero-total"><span id="totalCount">61</span><small>Total events</small></div></section>
-<section class="metrics" id="metrics"></section>
-<section><div class="toolbar"><div class="nav"><button id="prev" aria-label="Previous month">‹</button><button id="today">Today</button><button id="next" aria-label="Next month">›</button><span class="month-title" id="monthTitle"></span></div><div class="view"><button id="allOn">All categories</button><button id="allOff">Clear</button></div></div>
-<div class="filters" id="filters"><input class="search" id="search" placeholder="Search events or solution area" aria-label="Search"></div>
-<div class="calendar"><div class="weekdays"><div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div><div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div></div><div class="grid" id="grid"></div><div class="status" id="status"></div></div></section></main>
-<aside class="side" id="side"><button class="close" id="close" aria-label="Close details">×</button><div class="panel-empty" id="empty"><strong>Select an event</strong><p>Event details will appear here.</p></div><div class="detail" id="detail"><span class="pill" id="dCat"></span><h3 id="dTitle"></h3><div class="meta"><div class="row"><div class="label">Date</div><div class="value" id="dDate"></div></div><div class="row"><div class="label">Solution area</div><div class="value" id="dArea"></div></div></div><a class="link" id="dLink" target="_blank" rel="noopener">Open event resource</a></div></aside></div>
+:root{
+  --navy:#202a66;
+  --ink:#16213e;
+  --muted:#667085;
+  --line:#dce3ef;
+  --surface:#fff;
+  --bg:#f5f7fb;
+  --shadow:0 16px 50px rgba(22,33,62,.14);
+  --drawer-lg:390px;
+  --drawer-md:340px;
+}
+*{box-sizing:border-box}
+html{
+  scroll-behavior:smooth;
+  max-width:100%;
+  overflow-x:hidden;
+}
+body{
+  margin:0;
+  max-width:100%;
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Segoe UI",Arial,sans-serif;
+  padding-left:env(safe-area-inset-left);
+  padding-right:env(safe-area-inset-right);
+}
+button,input,select{font:inherit}
+button,select,input{outline:none}
+button,.event,.metric{touch-action:manipulation}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{
+  outline:3px solid #7aa7ff;
+  outline-offset:2px;
+}
+button{
+  transition:transform .16s ease,background-color .16s ease,box-shadow .16s ease,opacity .16s ease;
+}
+button:active{transform:translateY(1px)}
+
+.app{
+  min-height:100dvh;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 0;
+  transition:grid-template-columns .25s ease;
+}
+.app.drawer-open{grid-template-columns:minmax(0,1fr) var(--drawer-lg)}
+
+.main{
+  min-width:0;
+  padding:clamp(14px,1.7vw,24px);
+  container-type:inline-size;
+}
+
+.top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:18px;
+  min-width:0;
+}
+.brand{display:flex;gap:14px;align-items:center;min-width:0}
+.badge{
+  height:42px;width:42px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#08765e;color:#fff;font-weight:800;flex:none;
+}
+.title{min-width:0}
+.title h1{
+  font:700 clamp(1.35rem,1.8vw,1.8rem) Georgia,serif;
+  margin:0;color:#20245d;
+}
+.title p{
+  margin:5px 0 0;color:var(--muted);
+  font-size:clamp(.76rem,.9vw,.86rem);
+}
+
+.hero{
+  display:flex;justify-content:space-between;align-items:center;gap:24px;
+  padding:clamp(18px,2vw,26px);
+  margin-bottom:14px;border-radius:16px;color:#fff;
+  background:linear-gradient(120deg,#23266b 0%,#5a2b90 38%,#0078d4 72%,#00a4a6 100%);
+  box-shadow:0 14px 32px rgba(35,38,107,.18);
+  position:relative;overflow:hidden;
+}
+.hero:after{
+  content:"";position:absolute;width:240px;height:240px;border-radius:50%;
+  right:-65px;top:-115px;background:rgba(255,255,255,.12);
+}
+.hero h2{margin:4px 0 7px;font-size:clamp(1.35rem,2.35vw,2rem)}
+.hero p{margin:0;color:rgba(255,255,255,.86);font-size:clamp(.76rem,.9vw,.86rem)}
+.eyebrow{font-size:10px;letter-spacing:.16em;font-weight:800;color:#d9ecff}
+.hero-total{
+  z-index:1;min-width:120px;text-align:center;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(5px);
+  padding:14px 18px;border-radius:14px;flex:none;
+}
+.hero-total span{display:block;font-size:clamp(1.8rem,2.6vw,2.35rem);font-weight:800}
+.hero-total small{color:#fff}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(125px,1fr));
+  gap:9px;margin-bottom:14px;
+}
+.metric{
+  border:0;background:#fff;border-radius:12px;padding:12px;text-align:left;
+  box-shadow:0 4px 13px rgba(22,33,62,.07);cursor:pointer;position:relative;
+  overflow:hidden;border-top:4px solid var(--c);min-width:0;
+}
+.metric:before{
+  content:"";position:absolute;width:55px;height:55px;border-radius:50%;
+  right:-20px;bottom:-22px;background:var(--c);opacity:.1;
+}
+.metric strong{display:block;font-size:clamp(1.2rem,1.7vw,1.45rem);color:#20245d}
+.metric span{display:block;font-size:11px;color:#667085;line-height:1.25;margin-top:3px}
+.metric.active{box-shadow:0 0 0 2px var(--c),0 7px 20px rgba(22,33,62,.12)}
+.metric:hover{transform:translateY(-2px)}
+.metric[aria-pressed="false"]{opacity:.58}
+
+.toolbar{
+  background:var(--navy);color:#fff;border-radius:8px 8px 0 0;
+  padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  min-width:0;
+}
+.nav,.view{display:flex;align-items:center;gap:8px;min-width:0}
+.toolbar button{
+  border:0;color:#fff;background:#3b478c;border-radius:5px;
+  padding:8px 11px;cursor:pointer;min-height:38px;
+}
+.toolbar button:hover{background:#5361aa}
+.month-title{font-weight:700;min-width:150px;white-space:nowrap}
+
+.filters{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  background:#fff;padding:10px 13px;
+  border:1px solid var(--line);border-top:0;
+  min-width:0;
+}
+.filter-actions{
+  display:flex;align-items:center;gap:8px;
+  margin-left:auto;flex-wrap:wrap;min-width:0;
+}
+.solution-select{
+  max-width:235px;min-width:185px;
+  border:1px solid var(--line);background:#fff;color:#344054;
+  border-radius:8px;padding:8px 32px 8px 10px;cursor:pointer;
+}
+.search-wrap{
+  position:relative;display:flex;align-items:center;min-width:260px;min-width:0;
+}
+.search-icon{position:absolute;left:10px;pointer-events:none;color:#667085;font-size:14px}
+.search{
+  width:100%;border:1px solid var(--line);border-radius:8px;
+  padding:8px 36px 8px 32px;color:#344054;min-width:0;
+}
+.search-clear{
+  position:absolute;right:6px;border:0;background:transparent;
+  width:28px;height:28px;border-radius:50%;cursor:pointer;color:#667085;
+  display:grid;place-items:center;
+}
+.search-clear:hover{background:#eef1f7}
+.search-clear[hidden]{display:none}
+.search-count{
+  width:100%;color:#667085;font-size:12px;padding-top:2px;
+}
+
+.calendar{background:#fff;border:1px solid var(--line);border-top:0;position:relative;overflow:hidden}
+.calendar-scroll{width:100%;min-width:0;overflow:visible}
+.weekdays,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.weekday{
+  padding:9px;text-align:center;font-size:12px;color:#475467;
+  background:#f8f9fc;border-right:1px solid var(--line);
+}
+.weekday:last-child{border-right:0}
+.day{
+  min-height:132px;border-top:1px solid var(--line);border-right:1px solid var(--line);
+  padding:6px;overflow:hidden;min-width:0;
+}
+.day:nth-child(7n){border-right:0}
+.day.out{background:#fafbfc;color:#98a2b3}
+.date{
+  font-size:12px;margin-bottom:5px;display:flex;
+  align-items:center;justify-content:space-between;
+}
+.today .date span:first-child{
+  background:var(--navy);color:#fff;width:24px;height:24px;border-radius:50%;
+  display:grid;place-items:center;
+}
+.event{
+  display:block;width:100%;text-align:left;border:0;
+  border-left:4px solid var(--event);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--event) 18%,white),color-mix(in srgb,var(--event) 7%,white));
+  color:#19213d;border-radius:4px;margin:4px 0;padding:5px 6px;
+  font-size:11px;line-height:1.25;cursor:pointer;overflow:hidden;
+  text-overflow:ellipsis;
+}
+.event:hover{filter:brightness(.96);transform:translateY(-1px)}
+.more{
+  border:0;background:transparent;font-size:11px;color:#344054;
+  padding:4px 3px;cursor:pointer;text-decoration:underline;
+  text-underline-offset:2px;border-radius:4px;
+}
+.more:hover{background:#eef4ff}
+.status{
+  padding:8px 12px;background:#eef4ff;color:#344054;
+  font-size:12px;border-top:1px solid var(--line);
+}
+.no-results{
+  display:none;margin:18px;padding:28px 18px;border:1px dashed #c8d1e1;
+  border-radius:12px;text-align:center;color:#667085;background:#fbfcfe;
+}
+.no-results.show{display:block}
+.no-results strong{display:block;color:#344054;margin-bottom:5px}
+
+/* Mobile day list */
+.mobile-day-panel{
+  display:none;
+  border-top:1px solid var(--line);
+  background:#fff;
+  padding:14px;
+}
+.mobile-day-panel h3{margin:0;font-size:1rem;color:#20245d}
+.mobile-day-date{margin:3px 0 12px;color:#667085;font-size:.82rem}
+.mobile-day-list{display:grid;gap:8px}
+.mobile-day-empty{
+  padding:16px;border:1px dashed var(--line);border-radius:10px;
+  color:#667085;text-align:center;font-size:.85rem;
+}
+.mobile-list-event{
+  width:100%;border:1px solid var(--line);border-left:5px solid var(--event);
+  background:#fff;border-radius:10px;padding:11px 12px;text-align:left;cursor:pointer;
+  min-height:48px;
+}
+.mobile-list-event strong{display:block;font-size:.9rem;color:#16213e;margin-bottom:4px}
+.mobile-list-event span{display:block;font-size:.76rem;color:#667085}
+
+/* Drawer / panel */
+.side{
+  width:var(--drawer-lg);
+  min-width:0;background:#fff;border-left:0 solid var(--line);
+  padding:0;overflow:hidden;opacity:0;visibility:hidden;
+  transform:translateX(22px);
+  transition:opacity .22s ease,transform .25s ease,padding .25s ease,border-width .25s ease,visibility 0s linear .25s;
+  box-shadow:none;z-index:30;
+}
+.app.drawer-open .side{
+  padding:24px;border-left-width:1px;opacity:1;visibility:visible;transform:none;
+  box-shadow:-8px 0 30px rgba(34,49,90,.05);
+  transition:opacity .22s ease,transform .25s ease,padding .25s ease,border-width .25s ease,visibility 0s;
+}
+.side-inner{width:calc(var(--drawer-lg) - 48px);max-width:100%}
+.side-header{display:flex;justify-content:flex-end}
+.close{
+  border:0;background:#eef1f7;border-radius:50%;
+  width:38px;height:38px;cursor:pointer;display:grid;place-items:center;color:#16213e;
+}
+.close:hover{background:#e0e6f0}
+.panel-empty{margin:70px 0;text-align:center;color:#7a8497}
+.detail{display:none}
+.detail.open{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.pill{
+  display:inline-flex;color:white;border-radius:999px;padding:6px 9px;
+  font-size:12px;font-weight:600;margin:8px 0 18px;
+}
+.detail h3{font-size:clamp(1.2rem,1.7vw,1.45rem);margin:0 0 16px;line-height:1.25}
+.meta{border-top:1px solid var(--line)}
+.row{padding:13px 0;border-bottom:1px solid var(--line)}
+.label{font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.06em}
+.value{margin-top:4px;font-size:14px;word-break:break-word}
+.resource-url{font-size:12px;color:#475467;word-break:break-all}
+.detail-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.link,.copy-link{
+  border:0;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--navy);color:#fff;text-decoration:none;padding:10px 14px;
+  border-radius:6px;cursor:pointer;min-height:42px;
+}
+.copy-link{background:#eef1f7;color:#202a66}
+.copy-link:hover{background:#dfe5ef}
+.unavailable{
+  margin-top:18px;padding:10px 12px;border-radius:7px;
+  background:#f7f8fb;color:#667085;font-size:13px;
+}
+.copy-feedback{font-size:12px;color:#08765e;margin-top:8px;min-height:16px}
+
+/* Day dialog */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(15,23,42,.36);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;z-index:60;
+}
+.modal-backdrop.open{display:flex}
+.day-modal{
+  width:min(520px,100%);
+  max-height:min(78dvh,680px);
+  overflow:auto;background:#fff;border-radius:16px;
+  box-shadow:var(--shadow);padding:18px;
+}
+.day-modal-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px;
+}
+.day-modal h2{font-size:20px;margin:0}
+.day-modal .modal-date{font-size:13px;color:#667085;margin-top:3px}
+.modal-list{display:grid;gap:8px}
+.modal-event{
+  width:100%;border:1px solid var(--line);border-left:5px solid var(--event);
+  background:#fff;border-radius:9px;padding:11px 12px;text-align:left;cursor:pointer;
+}
+.modal-event:hover{background:#f8f9fc;transform:translateY(-1px)}
+.modal-event strong{display:block;color:#16213e;margin-bottom:4px}
+.modal-event span{display:block;color:#667085;font-size:12px}
+
+.toast{
+  position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));
+  transform:translate(-50%,18px);background:#172036;color:#fff;
+  padding:10px 14px;border-radius:9px;box-shadow:var(--shadow);
+  opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;
+  z-index:80;font-size:13px;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Large desktop */
+@media (min-width:1440px){
+  .app.drawer-open{grid-template-columns:minmax(0,1fr) var(--drawer-lg)}
+}
+
+/* Laptop / tablet landscape */
+@media (min-width:1024px) and (max-width:1439px){
+  .app.drawer-open{grid-template-columns:minmax(0,1fr) var(--drawer-md)}
+  .side{width:var(--drawer-md)}
+  .app.drawer-open .side{padding:20px}
+  .side-inner{width:calc(var(--drawer-md) - 40px)}
+  .metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .filter-actions{width:100%;margin-left:0;justify-content:flex-end}
+  .day{min-height:118px}
+}
+
+/* Tablet portrait: overlay drawer, calendar never compressed */
+@media (min-width:768px) and (max-width:1023px){
+  .app,.app.drawer-open{grid-template-columns:1fr}
+  .side{
+    position:fixed;inset:0 0 0 auto;
+    width:min(390px,88vw);height:100dvh;
+    padding:22px;border-left:1px solid var(--line);
+    opacity:1;visibility:visible;transform:translateX(100%);
+    transition:transform .25s ease;box-shadow:var(--shadow);overflow:auto;
+  }
+  .app.drawer-open .side{transform:none;padding:22px}
+  .side-inner{width:100%}
+  .metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .filter-actions{width:100%;margin-left:0}
+  .solution-select{flex:1;max-width:none}
+  .search-wrap{flex:2}
+  .day{min-height:108px}
+}
+
+/* Container-aware refinements when the main region gets narrow */
+@container (max-width:980px){
+  .metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@container (max-width:760px){
+  .toolbar{flex-wrap:wrap}
+  .view{margin-left:auto}
+  .filter-actions{width:100%;margin-left:0}
+}
+
+/* Mobile */
+@media (max-width:767px){
+  .main{padding:10px}
+  .top{margin-bottom:10px}
+  .top,.brand{min-width:0}
+  .title p{line-height:1.35}
+
+  .hero{
+    padding:16px;border-radius:12px;align-items:flex-start;gap:12px;
+  }
+  .hero p{max-width:65vw}
+  .hero-total{
+    min-width:78px;padding:9px 10px;border-radius:12px;
+  }
+
+  .metrics{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    gap:8px;padding:2px 1px 9px;
+    scrollbar-width:none;
+  }
+  .metrics::-webkit-scrollbar{display:none}
+  .metric{
+    min-width:148px;flex:0 0 148px;scroll-snap-align:start;
+    min-height:80px;
+  }
+
+  .toolbar{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+    padding:10px;
+  }
+  .nav{
+    display:grid;
+    grid-template-columns:44px 1fr 44px;
+    gap:8px;
+    width:100%;
+  }
+  .nav #today{
+    grid-column:2;
+    grid-row:2;
+  }
+  .nav #prev{grid-column:1;grid-row:2}
+  .nav #next{grid-column:3;grid-row:2}
+  .month-title{
+    grid-column:1 / -1;
+    grid-row:1;
+    min-width:0;
+    text-align:center;
+    font-size:1rem;
+  }
+  .view{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    width:100%;
+  }
+  .toolbar button{min-height:44px}
+
+  .filters{padding:9px}
+  .filter-actions{
+    display:grid;grid-template-columns:1fr;width:100%;margin:0;gap:8px;
+  }
+  .solution-select,.search-wrap{
+    width:100%;min-width:0;max-width:none;
+  }
+  .solution-select,.search{min-height:44px}
+
+  .calendar{overflow:visible}
+  .calendar-scroll{
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+    scrollbar-width:thin;
+    scroll-snap-type:x proximity;
+    border-bottom:1px solid var(--line);
+  }
+  .weekdays,.grid{
+    min-width:770px;
+  }
+  .weekday{
+    font-size:11px;
+    padding:8px 4px;
+    position:sticky;
+    top:0;
+    z-index:2;
+  }
+  .day{
+    min-height:150px;
+    padding:5px;
+    cursor:pointer;
+    position:relative;
+    scroll-snap-align:start;
+  }
+  .day:focus-within{box-shadow:inset 0 0 0 2px #7aa7ff}
+  .date{font-size:11px;margin-bottom:4px}
+  .today .date span:first-child{
+    width:22px;height:22px;
+  }
+
+  /* Keep event titles readable on phones; the calendar scrolls horizontally instead of squeezing cards. */
+  .event{
+    display:block;
+    height:auto;
+    min-height:0;
+    padding:5px 6px;
+    margin:4px 0;
+    border:0;
+    border-left:4px solid var(--event);
+    border-radius:5px;
+    background:linear-gradient(90deg,color-mix(in srgb,var(--event) 18%,white),color-mix(in srgb,var(--event) 7%,white));
+    font-size:10.5px;
+    line-height:1.22;
+    white-space:normal;
+    overflow:hidden;
+    text-overflow:clip;
+  }
+  .more{
+    min-height:28px;
+    padding:3px 4px;
+    font-size:10.5px;
+    text-decoration:underline;
+    color:#475467;
+  }
+  .mobile-day-panel{display:block}
+  .status{font-size:11px}
+
+  /* Mobile bottom sheet */
+  .app,.app.drawer-open{grid-template-columns:1fr}
+  .side{
+    position:fixed;
+    inset:auto 0 0 0;
+    width:100%;
+    height:auto;
+    max-height:86dvh;
+    padding:18px 18px calc(18px + env(safe-area-inset-bottom));
+    border-left:0;border-top:1px solid var(--line);
+    border-radius:18px 18px 0 0;
+    opacity:1;visibility:visible;
+    transform:translateY(110%);
+    transition:transform .25s ease;
+    box-shadow:0 -12px 36px rgba(22,33,62,.18);
+    overflow:auto;
+  }
+  .app.drawer-open .side{
+    transform:translateY(0);
+    padding:18px 18px calc(18px + env(safe-area-inset-bottom));
+    border-left:0;
+  }
+  .side-inner{width:100%}
+  .side-header{
+    position:sticky;top:-18px;
+    background:#fff;padding:4px 0 8px;z-index:2;
+  }
+  .close{width:44px;height:44px}
+  .detail-actions{display:grid!important;grid-template-columns:1fr}
+  .link,.copy-link{width:100%;min-height:44px}
+
+  .modal-backdrop{padding:10px;align-items:flex-end}
+  .day-modal{
+    width:100%;max-height:82dvh;border-radius:16px 16px 0 0;
+    padding-bottom:calc(18px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Landscape phones */
+@media (max-width:767px) and (orientation:landscape){
+  .hero{padding:12px 14px}
+  .hero p{max-width:none}
+  .metrics{margin-bottom:10px}
+  .side{max-height:92dvh}
+  .weekdays,.grid{min-width:720px}
+  .day{min-height:138px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+    animation:none!important;
+  }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <main class="main">
+    <header class="top">
+      <div class="brand">
+        <div class="badge" aria-hidden="true">GS</div>
+        <div class="title">
+          <h1>Global Skilling Field Calendar</h1>
+          <p>Explore flagship, competitive, product, and skilling content moments in one interactive view.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero" aria-labelledby="heroTitle">
+      <div>
+        <div class="eyebrow">GLOBAL SKILLING • FIELD INTELLIGENCE</div>
+        <h2 id="heroTitle">Moments that matter, at a glance</h2>
+        <p>Track the event landscape across Microsoft, competitive moments, product launches and skilling content releases.</p>
+      </div>
+      <div class="hero-total">
+        <span id="totalCount">0</span>
+        <small>Total events</small>
+      </div>
+    </section>
+
+    <section class="metrics" id="metrics" aria-label="Event categories"></section>
+
+    <section>
+      <div class="toolbar">
+        <div class="nav">
+          <button id="prev" aria-label="Previous month">‹</button>
+          <button id="today">Today</button>
+          <button id="next" aria-label="Next month">›</button>
+          <span class="month-title" id="monthTitle" aria-live="polite"></span>
+        </div>
+        <div class="view">
+          <button id="allOn">All categories</button>
+          <button id="allOff">Clear</button>
+        </div>
+      </div>
+
+      <div class="filters" id="filters">
+        <div class="filter-actions">
+          <label>
+            <span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Solution Area</span>
+            <select id="solutionFilter" class="solution-select" aria-label="Filter by solution area">
+              <option value="">All Solution Areas</option>
+            </select>
+          </label>
+
+          <div class="search-wrap">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input class="search" id="search" placeholder="Search events or solution area" aria-label="Search events">
+            <button class="search-clear" id="searchClear" aria-label="Clear search" hidden>×</button>
+          </div>
+        </div>
+        <div class="search-count" id="searchCount" aria-live="polite"></div>
+      </div>
+
+      <div class="calendar">
+        <div class="calendar-scroll" id="calendarScroll" aria-label="Scrollable monthly calendar">
+          <div class="weekdays" aria-hidden="true">
+            <div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div>
+            <div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div>
+          </div>
+          <div class="no-results" id="noResults" role="status">
+            <strong>No matching events in this month</strong>
+            <span>Try another month or adjust your filters.</span>
+          </div>
+          <div class="grid" id="grid" aria-label="Monthly event calendar"></div>
+        </div>
+
+        <section class="mobile-day-panel" id="mobileDayPanel" aria-live="polite">
+          <h3>Selected date</h3>
+          <div class="mobile-day-date" id="mobileDayDate"></div>
+          <div class="mobile-day-list" id="mobileDayList"></div>
+        </section>
+
+        <div class="status" id="status" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="side" id="side" aria-label="Event details">
+    <div class="side-inner">
+      <div class="side-header">
+        <button class="close" id="close" aria-label="Close event details">×</button>
+      </div>
+      <div class="panel-empty" id="empty">
+        <strong>Select an event</strong>
+        <p>Event details will appear here.</p>
+      </div>
+      <div class="detail" id="detail">
+        <span class="pill" id="dCat"></span>
+        <h3 id="dTitle"></h3>
+        <div class="meta">
+          <div class="row"><div class="label">Date</div><div class="value" id="dDate"></div></div>
+          <div class="row"><div class="label">Duration</div><div class="value" id="dDuration"></div></div>
+          <div class="row"><div class="label">Solution area</div><div class="value" id="dArea"></div></div>
+          <div class="row"><div class="label">Resource name</div><div class="value" id="dResourceName"></div></div>
+          <div class="row" id="dUrlRow"><div class="label">Resource URL</div><div class="value resource-url" id="dResourceUrl"></div></div>
+        </div>
+        <div class="detail-actions" id="detailActions">
+          <a class="link" id="dLink" target="_blank" rel="noopener">Open event resource</a>
+          <button class="copy-link" id="copyLink" type="button">Copy Link</button>
+        </div>
+        <div class="unavailable" id="resourceUnavailable" hidden>Resource not yet available.</div>
+        <div class="copy-feedback" id="copyFeedback" aria-live="polite"></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="modal-backdrop" id="dayModalBackdrop" aria-hidden="true">
+  <div class="day-modal" id="dayModal" role="dialog" aria-modal="true" aria-labelledby="dayModalTitle" tabindex="-1">
+    <div class="day-modal-head">
+      <div>
+        <h2 id="dayModalTitle">Events</h2>
+        <div class="modal-date" id="dayModalDate"></div>
+      </div>
+      <button class="close" id="dayModalClose" aria-label="Close day events">×</button>
+    </div>
+    <div class="modal-list" id="dayModalList"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
 const events=[{"category":"Competitor Events","title":"Salesforce Dreamforce","start":"2026-09-14","end":"2026-09-18","rawStart":"2026-09-14 00:00:00","solutionArea":"Cross Solution Area","link":"https://www.salesforce.com/dreamforce/","linkLabel":"https://www.salesforce.com/dreamforce/","color":"#3B7D23"},{"category":"Competitor Events","title":"Oracle AI World","start":"2026-10-26","end":"2026-10-29","rawStart":"2026-10-26 00:00:00","solutionArea":"Cross Solution Area","link":"https://www.oracle.com/ai-world/","linkLabel":"https://www.oracle.com/ai-world/","color":"#3B7D23"},{"category":"Competitor Events","title":"AWS re:Invent","start":"2026-11-30","end":"2026-12-04","rawStart":"2026-11-30 00:00:00","solutionArea":"Cross Solution Area","link":"https://aws.amazon.com/events/reinvent/","linkLabel":"https://aws.amazon.com/events/reinvent/","color":"#3B7D23"},{"category":"Competitor Events","title":"NVIDIA GTC","start":"2027-03-14","end":"2027-03-18","rawStart":"2027-03-14 00:00:00","solutionArea":"Cross Solution Area","link":"https://www.nvidia.com/gtc/","linkLabel":"https://www.nvidia.com/gtc/","color":"#3B7D23"},{"category":"Competitor Events","title":"Google Cloud Next","start":"2027-04-13","end":"2027-04-15","rawStart":"2027-04-13 00:00:00","solutionArea":"Cross Solution Area","link":"https://www.googlecloudevents.com/next-vegas","linkLabel":"https://www.googlecloudevents.com/next-vegas","color":"#3B7D23"},{"category":"Microsoft Flagship Events","title":"Microsoft Ignite","start":"2026-11-17","end":"2026-11-20","rawStart":"2026-11-17 00:00:00","solutionArea":"Cross Solution Area","link":"https://ignite.microsoft.com/","linkLabel":"https://ignite.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft Build (May/June Timeframe)","start":"","end":"","rawStart":"May/June 2027 Timeframe","solutionArea":"Cross Solution Area","link":"https://build.microsoft.com/","linkLabel":"https://build.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Singapore","start":"2026-10-12","end":"2026-10-12","rawStart":"2026-10-12 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Paris","start":"2026-10-20","end":"2026-10-20","rawStart":"2026-10-20 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: London","start":"2026-10-21","end":"2026-10-21","rawStart":"2026-10-21 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Cologne","start":"2026-10-22","end":"2026-10-22","rawStart":"2026-10-22 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Philadelphia","start":"2026-10-22","end":"2026-10-22","rawStart":"2026-10-22 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Mexico City","start":"2026-10-29","end":"2026-10-29","rawStart":"2026-10-29 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Dubai","start":"2026-11-03","end":"2026-11-03","rawStart":"2026-11-03 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Seattle","start":"2026-12-09","end":"2026-12-09","rawStart":"2026-12-09 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Utrecht","start":"2026-12-10","end":"2026-12-10","rawStart":"2026-12-10 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Toronto","start":"2027-01-13","end":"2027-01-13","rawStart":"2027-01-13 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Madrid","start":"2027-01-14","end":"2027-01-14","rawStart":"2027-01-14 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Taipei","start":"2027-01-20","end":"2027-01-20","rawStart":"2027-01-20 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Chicago","start":"2027-02-02","end":"2027-02-02","rawStart":"2027-02-02 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Sydney","start":"2027-02-04","end":"2027-02-04","rawStart":"2027-02-04 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Johannesburg","start":"2027-02-10","end":"2027-02-10","rawStart":"2027-02-10 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Mumbai","start":"2027-02-10","end":"2027-02-10","rawStart":"2027-02-10 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Bengaluru","start":"2027-02-15","end":"2027-02-15","rawStart":"2027-02-15 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Milan","start":"2027-02-18","end":"2027-02-18","rawStart":"2027-02-18 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Shanghai","start":"2027-03-16","end":"2027-03-16","rawStart":"2027-03-16 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Stockholm","start":"2027-03-17","end":"2027-03-17","rawStart":"2027-03-17 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: New York City","start":"2027-03-18","end":"2027-03-18","rawStart":"2027-03-18 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Sao Paulo","start":"2027-03-24","end":"2027-03-24","rawStart":"2027-03-24 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Riyadh","start":"2027-04-07","end":"2027-04-07","rawStart":"2027-04-07 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Seoul","start":"2027-04-14","end":"2027-04-14","rawStart":"2027-04-14 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Tokyo","start":"2027-04-15","end":"2027-04-15","rawStart":"2027-04-15 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Zurich","start":"2027-04-15","end":"2027-04-15","rawStart":"2027-04-15 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Jakarta","start":"2027-04-22","end":"2027-04-22","rawStart":"2027-04-22 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Miami","start":"2027-04-28","end":"2027-04-28","rawStart":"2027-04-28 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Copenhagen","start":"2027-04-29","end":"2027-04-29","rawStart":"2027-04-29 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Montreal","start":"2027-05-25","end":"2027-05-25","rawStart":"2027-05-25 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Brussels","start":"2027-05-27","end":"2027-05-27","rawStart":"2027-05-27 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Houston","start":"2027-06-02","end":"2027-06-02","rawStart":"2027-06-02 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Tel Aviv","start":"2027-06-02","end":"2027-06-02","rawStart":"2027-06-02 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Atlanta","start":"2027-06-15","end":"2027-06-15","rawStart":"2027-06-15 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Microsoft Flagship Events","title":"Microsoft AI Tour: Osaka","start":"2027-06-24","end":"2027-06-24","rawStart":"2027-06-24 00:00:00","solutionArea":"Cross Solution Area","link":"https://aitour.microsoft.com/","linkLabel":"https://aitour.microsoft.com/","color":"#0070C0"},{"category":"Global Skilling Moments","title":"Cybersecurity Awareness Month","start":"2026-10-01","end":"2026-10-01","rawStart":"2026-10-01 00:00:00","solutionArea":"Security","link":"https://aka.ms/cam2026","linkLabel":"https://aka.ms/cam2026","color":"#104862"},{"category":"Global Skilling Moments","title":"AI Skills Fest (Target March 2027)","start":"2027-03-01","end":"2027-03-01","rawStart":"2027-03-01 00:00:00","solutionArea":"Cross Solution Area","link":"https://aiskillsnavigator.microsoft.com/","linkLabel":"https://aiskillsnavigator.microsoft.com/","color":"#104862"},{"category":"Global Skilling Moments","title":"Maker Month","start":"2027-06-01","end":"2027-06-30","rawStart":"2027-06-01 00:00:00","solutionArea":"Cross Solution Area","link":"https://aiskillsnavigator.microsoft.com/","linkLabel":"https://aiskillsnavigator.microsoft.com/","color":"#104862"},{"category":"Microsoft Flagship Events","title":"CIO Summit FY27","start":"2026-11-17","end":"2026-11-19","rawStart":"2026-11-17 00:00:00","solutionArea":"Cross Solution Area","link":"","linkLabel":"TBD","color":"#0070C0"},{"category":"Microsoft Moments","title":"Earnings Release","start":"2026-10-28","end":"2026-10-28","rawStart":"2026-10-28 00:00:00","solutionArea":"Cross Solution Area","link":"https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast","linkLabel":"FY26 Q4 - Press Releases - Investor Relations - Microsoft","color":"#0B77A0"},{"category":"Microsoft Moments","title":"Earnings Release","start":"2027-01-27","end":"2027-01-27","rawStart":"2027-01-27 00:00:00","solutionArea":"Cross Solution Area","link":"https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast","linkLabel":"FY26 Q4 - Press Releases - Investor Relations - Microsoft","color":"#0B77A0"},{"category":"Microsoft Moments","title":"Earnings Release","start":"2027-04-28","end":"2027-04-28","rawStart":"2027-04-28 00:00:00","solutionArea":"Cross Solution Area","link":"https://www.microsoft.com/en-us/Investor/earnings/FY-2026-Q4/press-release-webcast","linkLabel":"FY26 Q4 - Press Releases - Investor Relations - Microsoft","color":"#0B77A0"},{"category":"Product Launch","title":"AI at Work Moment","start":"2026-09-30","end":"2026-09-30","rawStart":"2026-09-30 00:00:00","solutionArea":"AI Business Solutions","link":"","linkLabel":"aka.ms/AIatWorkRoadmap","color":"#D86ECC"},{"category":"Product Launch","title":"Project Perception GA (Ignite Timeframe)","start":"2026-11-01","end":"2026-11-01","rawStart":"2026-11-01 00:00:00","solutionArea":"Security","link":"","linkLabel":"TBD","color":"#D86ECC"},{"category":"Product Launch","title":"Ignite Product GA Announcements","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cross Solution Area","link":"","linkLabel":"TBD","color":"#D86ECC"},{"category":"Product Launch","title":"Microsoft Scout GA (Ignite Timeframe)","start":"2026-11-01","end":"2026-11-01","rawStart":"2026-11-01 00:00:00","solutionArea":"AI Business Solutions","link":"","linkLabel":"TBD","color":"#D86ECC"},{"category":"Skilling Content Release","title":"AI at Work Moment Skilling","start":"2026-09-30","end":"2026-09-30","rawStart":"2026-09-30 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoftdigitallearning.visualstudio.com/Courseware/_workitems/edit/180629","linkLabel":"Skilling Intake Request 180629 September AI at Work Moment","color":"#78206E"},{"category":"Skilling Content Release","title":"Caldova End-toEnd Demo Enablement","start":"2026-09-30","end":"2026-09-30","rawStart":"2026-09-30 00:00:00","solutionArea":"Cross Solution Area","link":"https://microsoftdigitallearning.visualstudio.com/Courseware/_workitems/edit/177099","linkLabel":"Skilling Intake Request 177099 Caldova End-to-End Demo Enablement","color":"#78206E"},{"category":"Skilling Content Release","title":"Skilling for Azure Quantum","start":"2026-09-30","end":"2026-09-30","rawStart":"2026-09-30 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoftdigitallearning.visualstudio.com/Courseware/_workitems/edit/178664","linkLabel":"Skilling Intake Request 178664 Develop skilling for Azure Quantum","color":"#78206E"},{"category":"Skilling Content Release","title":"Copilot consumption and Token Economics","start":"2026-09-18","end":"2026-09-18","rawStart":"2026-09-18 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoftdigitallearning.visualstudio.com/Courseware/_workitems/edit/176973","linkLabel":"Skilling Intake Request 176973 Copilot Consumption and Token Economics","color":"#78206E"},{"category":"Microsoft Moments","title":"MVP Summit","start":"2027-03-16","end":"2027-03-18","rawStart":"2027-03-16 00:00:00","solutionArea":"Cross Solution Area","link":"","linkLabel":"TBD","color":"#0B77A0"},{"category":"Microsoft Moments","title":"Ability Summit (Target May 2027)","start":"2026-05-01","end":"2026-05-01","rawStart":"2026-05-01 00:00:00","solutionArea":"Cross Solution Area","link":"","linkLabel":"TBD","color":"#0B77A0"},{"category":"Microsoft Moments","title":"GitHub Universe","start":"2026-10-29","end":"2026-10-30","rawStart":"2026-10-29 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://githubuniverse.com/","linkLabel":"https://githubuniverse.com/","color":"#0B77A0"},{"category":"Skilling Content Release","title":"Skilling for Ignite GA Announcements","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cross Solution Area","link":"https://aiskillsnavigator.microsoft.com/","linkLabel":"https://aiskillsnavigator.microsoft.com/","color":"#78206E"},{"category":"Microsoft Moments","title":"MCAPS Start (July Timeframe)","start":"2027-07-01","end":"2027-07-01","rawStart":"2027-07-01 00:00:00","solutionArea":"Cross Solution Area","link":"https://mcapsstart.microsoft.com/","linkLabel":"https://mcapsstart.microsoft.com","color":"#0B77A0"},{"category":"Microsoft Moments","title":"MCAPS Tech Connect FY27","start":"2027-02-23","end":"2027-02-25","rawStart":"2027-02-23 00:00:00","solutionArea":"Cross Solution Area","link":"http://techconnect.microsoft.com/","linkLabel":"http://Techconnect.microsoft.com","color":"#0B77A0"},{"category":"Product Launch","title":"Azure Lifecycle Updates (Disclosure)","start":"2026-09-14","end":"2026-09-14","rawStart":"2026-09-14 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Fabric IQ in M365 Copilot experiences (GA)","start":"2026-09-14","end":"2026-09-14","rawStart":"2026-09-14 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Foundry Agent Platform Marketing Moment (GA, Public Preview)","start":"2026-09-17","end":"2026-09-17","rawStart":"2026-09-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Observabitlity in Fabric (Public Preview)","start":"2026-09-28","end":"2026-09-28","rawStart":"2026-09-28 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Microsoft 365 evolution in Education (Announcement)","start":"2026-10-06","end":"2026-10-06","rawStart":"2026-10-06 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Azure Boost Confidential Compute (Public Preview)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Azure Local: Azure Copilot, Foundry Local & Scout (Public Preview)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Maia & Cobalt Roadmap (Disclosure)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Foundry: MAI-Thinking-2 & MAI-Code-2 Flash (Public Preview)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Foundry: New knowledge sources, MCP & Serverless Updates (Public Preview)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Foundry: Web IQ (GA)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Fabric IQ: IQ Sharing (Public Preview)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Fabric IQ: Ontology (Public Preview)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Compute + Silocon innovations (GA, Public Preview)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"GitHub Copilot modernization, agent-led modernization (Public Preview, GA)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"AKS AI Platform (Public Preview, GA)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Agentic operations (Disclosure, Public Preview, GA)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"HorizonDB in Fabric","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Azure HorizonDB (GA)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Project Ignis (November Timeframe, Public Preview)","start":"2026-11-01","end":"2026-11-01","rawStart":"2026-11-01 00:00:00","solutionArea":"Cloud & AI Platforms","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Security ISOC Moment (Product Launch + Moment)","start":"2026-09-23","end":"2026-09-23","rawStart":"2026-09-23 00:00:00","solutionArea":"Security","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Secure AI Moment (Public Preview)","start":"2026-10-15","end":"2026-10-15","rawStart":"2026-10-15 00:00:00","solutionArea":"Security","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Security at Ignite Moment (GA, Public Preview)","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"Security","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"D365 Contact Center: Copilot and AI innovation","start":"2026-09-19","end":"2026-09-19","rawStart":"2026-09-19 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"D365 Contact Center: ACS Deprecation","start":"2026-09-23","end":"2026-09-23","rawStart":"2026-09-23 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Copilot Code Tab","start":"2026-09-28","end":"2026-09-28","rawStart":"2026-09-28 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"D365 Field Service announcement","start":"2026-09-30","end":"2026-09-30","rawStart":"2026-09-30 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Agent Accounts for Copilot Studio agents","start":"2026-09-30","end":"2026-09-30","rawStart":"2026-09-30 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Agent Advisor: Workflow recommendations","start":"2026-09-30","end":"2026-09-30","rawStart":"2026-09-30 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"D365 Contact Center: Workforce Management Updates","start":"2026-10-01","end":"2026-10-01","rawStart":"2026-10-01 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"MCP Apps: Rich Interactive UI rendering for Copilot Studio Agents","start":"2026-10-15","end":"2026-10-15","rawStart":"2026-10-15 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"},{"category":"Product Launch","title":"Connectivity Ops Agent for W365 IT Admins","start":"2026-11-17","end":"2026-11-17","rawStart":"2026-11-17 00:00:00","solutionArea":"AI Business Solutions","link":"https://microsoft-my.sharepoint.com/:p:/p/cajord/cQrmH76M8SJaQ7NE1h6rLBxcEgUCXnAOaFcV6ySjl7tzdpk6Dg","linkLabel":"H1 Tier 1 CSA Announcements.pptx","color":"#D86ECC"}]; const categoryColors={"Microsoft Flagship Events":"#0070C0","Competitor Events":"#3B7D23","Skilling Content Release":"#78206E","Product Launch":"#D86ECC","Microsoft Moments":"#0B77A0","Global Skilling Moments":"#104862"};
-const state={year:2026,month:9,active:new Set(Object.keys(categoryColors)),query:''};
-const grid=document.getElementById('grid'), title=document.getElementById('monthTitle'), status=document.getElementById('status');
-function parseLocal(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
-function fmtRange(e){if(!e.start)return e.rawStart||'Date not scheduled';const a=parseLocal(e.start),b=parseLocal(e.end);const opt={month:'short',day:'numeric',year:'numeric'};return e.start===e.end?a.toLocaleDateString(undefined,opt):`${a.toLocaleDateString(undefined,opt)} – ${b.toLocaleDateString(undefined,opt)}`}
-function overlaps(e,d){if(!e.start)return false;const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());return x>=parseLocal(e.start)&&x<=parseLocal(e.end)}
-function filtered(){const q=state.query.toLowerCase();return events.filter(e=>state.active.has(e.category)&&(!q||`${e.title} ${e.solutionArea} ${e.category}`.toLowerCase().includes(q)))}
-function renderMetrics(){const box=document.getElementById('metrics');box.innerHTML='';Object.entries(categoryColors).forEach(([cat,color])=>{const count=events.filter(e=>e.category===cat).length;const b=document.createElement('button');b.className='metric '+(state.active.has(cat)?'active':'');b.style.setProperty('--c',color);b.innerHTML=`<strong>${count}</strong><span>${cat}</span>`;b.title=`Toggle ${cat}`;b.onclick=()=>{state.active.has(cat)?state.active.delete(cat):state.active.add(cat);renderFilters();renderMetrics();render()};box.appendChild(b)});document.getElementById('totalCount').textContent=events.length} 
-function renderFilters(){const wrap=document.getElementById('filters');wrap.querySelectorAll('.chip').forEach(x=>x.remove())}
-function render(){title.textContent=new Date(state.year,state.month,1).toLocaleDateString(undefined,{month:'long',year:'numeric'});grid.innerHTML='';const first=new Date(state.year,state.month,1), start=new Date(state.year,state.month,1-first.getDay());const list=filtered();let visibleIds=new Set();for(let i=0;i<42;i++){const d=new Date(start);d.setDate(start.getDate()+i);const cell=document.createElement('div');cell.className='day'+(d.getMonth()!==state.month?' out':'')+(d.toDateString()===new Date().toDateString()?' today':'');cell.innerHTML=`<div class="date"><span>${d.getDate()}</span></div>`;const hits=list.filter(e=>overlaps(e,d));hits.slice(0,4).forEach(e=>{visibleIds.add(e.title+'|'+e.start);const b=document.createElement('button');b.className='event';b.style.setProperty('--event',e.color);b.textContent=e.title;b.title=e.title;b.onclick=()=>showDetail(e);cell.appendChild(b)});if(hits.length>4){const m=document.createElement('div');m.className='more';m.textContent=`+${hits.length-4} more`;cell.appendChild(m)}grid.appendChild(cell)}status.textContent=`${visibleIds.size} matching event${visibleIds.size===1?'':'s'} shown for ${title.textContent}. ${events.filter(e=>!e.start).length} event with a non-specific date is retained in the data but not plotted.`}
-function showDetail(e){document.getElementById('empty').style.display='none';document.getElementById('detail').classList.add('open');const side=document.getElementById('side');side.classList.add('show');const cat=document.getElementById('dCat');cat.textContent=e.category;cat.style.background=e.color;document.getElementById('dTitle').textContent=e.title;document.getElementById('dDate').textContent=fmtRange(e);document.getElementById('dArea').textContent=e.solutionArea;const a=document.getElementById('dLink');if(e.link){a.href=e.link;a.style.display='inline-block'}else{a.removeAttribute('href');a.style.display='none'}}
-document.getElementById('prev').onclick=()=>{state.month--;if(state.month<0){state.month=11;state.year--}render()};document.getElementById('next').onclick=()=>{state.month++;if(state.month>11){state.month=0;state.year++}render()};document.getElementById('today').onclick=()=>{const n=new Date();state.year=n.getFullYear();state.month=n.getMonth();render()};document.getElementById('allOn').onclick=()=>{state.active=new Set(Object.keys(categoryColors));renderFilters();renderMetrics();render()};document.getElementById('allOff').onclick=()=>{state.active.clear();renderFilters();renderMetrics();render()};document.getElementById('search').oninput=e=>{state.query=e.target.value;render()};document.getElementById('close').onclick=()=>document.getElementById('side').classList.remove('show');renderFilters();renderMetrics();render();
-</script></body></html>
+
+const now = new Date();
+const state = {
+  year: now.getFullYear(),
+  month: now.getMonth(),
+  active: new Set(Object.keys(categoryColors)),
+  query: '',
+  solutionArea: '',
+  selectedDate: new Date(now.getFullYear(), now.getMonth(), now.getDate())
+};
+
+const app = document.getElementById('app');
+const grid = document.getElementById('grid');
+const calendarScroll = document.getElementById('calendarScroll');
+const title = document.getElementById('monthTitle');
+const status = document.getElementById('status');
+const noResults = document.getElementById('noResults');
+const searchInput = document.getElementById('search');
+const searchClear = document.getElementById('searchClear');
+const searchCount = document.getElementById('searchCount');
+const solutionFilter = document.getElementById('solutionFilter');
+const mobileDayDate = document.getElementById('mobileDayDate');
+const mobileDayList = document.getElementById('mobileDayList');
+const dayModalBackdrop = document.getElementById('dayModalBackdrop');
+const dayModal = document.getElementById('dayModal');
+const dayModalList = document.getElementById('dayModalList');
+const dayModalDate = document.getElementById('dayModalDate');
+const toast = document.getElementById('toast');
+
+let lastFocusedElement = null;
+let lastDrawerTrigger = null;
+let resizeTimer = null;
+
+function parseLocal(s){
+  const [y,m,d]=s.split('-').map(Number);
+  return new Date(y,m-1,d);
+}
+function fmtRange(e){
+  if(!e.start) return e.rawStart || 'Date not scheduled';
+  const a=parseLocal(e.start),b=parseLocal(e.end);
+  const opt={month:'short',day:'numeric',year:'numeric'};
+  return e.start===e.end
+    ? a.toLocaleDateString(undefined,opt)
+    : `${a.toLocaleDateString(undefined,opt)} – ${b.toLocaleDateString(undefined,opt)}`;
+}
+function durationText(e){
+  if(!e.start || !e.end) return 'TBD';
+  const a=parseLocal(e.start),b=parseLocal(e.end);
+  const days=Math.round((b-a)/86400000)+1;
+  return days===1?'1 day':`${days} days`;
+}
+function overlaps(e,d){
+  if(!e.start)return false;
+  const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  return x>=parseLocal(e.start)&&x<=parseLocal(e.end);
+}
+function matchesCurrentFilters(e){
+  const q=state.query.trim().toLowerCase();
+  const searchable=`${e.title} ${e.solutionArea} ${e.category}`.toLowerCase();
+  return state.active.has(e.category) &&
+    (!state.solutionArea || e.solutionArea===state.solutionArea) &&
+    (!q || searchable.includes(q));
+}
+function filtered(){return events.filter(matchesCurrentFilters)}
+function eventIdentity(e){return `${e.title}|${e.start}|${e.end}|${e.category}`}
+
+function visibleEventLimit(){
+  const width = document.querySelector('.main').getBoundingClientRect().width;
+  if(window.innerWidth < 768) return 4;
+  if(width < 850) return 3;
+  if(width < 1100) return 4;
+  return 5;
+}
+
+function renderMetrics(){
+  const box=document.getElementById('metrics');
+  box.innerHTML='';
+  Object.entries(categoryColors).forEach(([cat,color])=>{
+    const count=events.filter(e=>e.category===cat).length;
+    const active=state.active.has(cat);
+    const b=document.createElement('button');
+    b.className='metric '+(active?'active':'');
+    b.style.setProperty('--c',color);
+    b.setAttribute('aria-pressed',String(active));
+    b.setAttribute('aria-label',`${active?'Hide':'Show'} ${cat}, ${count} events`);
+    b.innerHTML=`<strong>${count}</strong><span>${cat}</span>`;
+    b.onclick=()=>toggleCategory(cat);
+    box.appendChild(b);
+  });
+  document.getElementById('totalCount').textContent=events.length;
+}
+
+function toggleCategory(cat){
+  if(state.active.has(cat)) state.active.delete(cat);
+  else state.active.add(cat);
+  renderMetrics();
+  render();
+}
+
+function buildSolutionFilter(){
+  const areas=[...new Set(events.map(e=>e.solutionArea).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+  solutionFilter.innerHTML='<option value="">All Solution Areas</option>';
+  areas.forEach(area=>{
+    const opt=document.createElement('option');
+    opt.value=area;
+    opt.textContent=area;
+    solutionFilter.appendChild(opt);
+  });
+}
+
+function dateKey(d){
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function renderMobileSelectedDay(){
+  const list=filtered();
+  const d=state.selectedDate;
+  const hits=list.filter(e=>overlaps(e,d));
+
+  mobileDayDate.textContent=d.toLocaleDateString(undefined,{
+    weekday:'long',month:'long',day:'numeric',year:'numeric'
+  });
+  mobileDayList.innerHTML='';
+
+  if(!hits.length){
+    const empty=document.createElement('div');
+    empty.className='mobile-day-empty';
+    empty.textContent='No matching events for this date.';
+    mobileDayList.appendChild(empty);
+    return;
+  }
+
+  hits.forEach(e=>{
+    const b=document.createElement('button');
+    b.type='button';
+    b.className='mobile-list-event';
+    b.style.setProperty('--event',e.color);
+    b.innerHTML=`<strong>${escapeHtml(e.title)}</strong><span>${escapeHtml(e.category)} · ${escapeHtml(e.solutionArea || 'Not specified')}</span>`;
+    b.onclick=()=>showDetail(e,b);
+    mobileDayList.appendChild(b);
+  });
+}
+
+function render(){
+  const monthDate=new Date(state.year,state.month,1);
+  title.textContent=monthDate.toLocaleDateString(undefined,{month:'long',year:'numeric'});
+  grid.innerHTML='';
+
+  const first=new Date(state.year,state.month,1);
+  const start=new Date(state.year,state.month,1-first.getDay());
+  const list=filtered();
+  const visibleIds=new Set();
+  const limit=visibleEventLimit();
+
+  for(let i=0;i<42;i++){
+    const d=new Date(start);
+    d.setDate(start.getDate()+i);
+
+    const cell=document.createElement('div');
+    cell.className='day'+
+      (d.getMonth()!==state.month?' out':'')+
+      (d.toDateString()===new Date().toDateString()?' today':'');
+
+    const dateLabel=d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+    cell.setAttribute('aria-label',dateLabel);
+    cell.dataset.date=dateKey(d);
+    cell.innerHTML=`<div class="date"><span>${d.getDate()}</span></div>`;
+
+    const hits=list.filter(e=>overlaps(e,d));
+
+    hits.slice(0,limit).forEach(e=>{
+      visibleIds.add(eventIdentity(e));
+      const b=document.createElement('button');
+      b.className='event';
+      b.style.setProperty('--event',e.color);
+      b.textContent=e.title;
+      b.title=e.title;
+      b.setAttribute('aria-label',`${e.title}. ${e.category}. ${e.solutionArea}. ${fmtRange(e)}`);
+      b.onclick=(ev)=>{
+        ev.stopPropagation();
+        state.selectedDate=new Date(d);
+        renderMobileSelectedDay();
+        showDetail(e,b);
+      };
+      cell.appendChild(b);
+    });
+
+    if(hits.length>limit){
+      hits.slice(limit).forEach(e=>visibleIds.add(eventIdentity(e)));
+      const more=document.createElement('button');
+      more.className='more';
+      more.type='button';
+      more.textContent=`+${hits.length-limit} more`;
+      more.setAttribute('aria-label',`Show all ${hits.length} events for ${dateLabel}`);
+      more.onclick=(ev)=>{
+        ev.stopPropagation();
+        if(window.innerWidth<768){
+          state.selectedDate=new Date(d);
+          renderMobileSelectedDay();
+          document.getElementById('mobileDayPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+        }else{
+          openDayModal(d,hits,more);
+        }
+      };
+      cell.appendChild(more);
+    }
+
+    cell.addEventListener('click',()=>{
+      if(window.innerWidth<768){
+        state.selectedDate=new Date(d);
+        renderMobileSelectedDay();
+        document.getElementById('mobileDayPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+      }
+    });
+
+    grid.appendChild(cell);
+  }
+
+  const monthVisible=visibleIds.size;
+  noResults.classList.toggle('show',monthVisible===0);
+  grid.style.display=monthVisible===0?'none':'grid';
+
+  const totalMatching=list.length;
+  searchCount.textContent=
+    `${totalMatching} event${totalMatching===1?'':'s'} match the current filters · ${monthVisible} shown in ${title.textContent}.`;
+
+  const undated=events.filter(e=>!e.start).length;
+  status.textContent=
+    `${monthVisible} matching event${monthVisible===1?'':'s'} shown for ${title.textContent}. `+
+    `${undated} event${undated===1?'':'s'} with a non-specific date ${undated===1?'is':'are'} retained in the data but not plotted.`;
+
+  if(state.selectedDate.getFullYear()!==state.year || state.selectedDate.getMonth()!==state.month){
+    state.selectedDate=new Date(state.year,state.month,1);
+  }
+  renderMobileSelectedDay();
+
+  if(window.innerWidth<768){
+    requestAnimationFrame(()=>{
+      const selected=grid.querySelector(`[data-date="${dateKey(state.selectedDate)}"]`);
+      if(selected && calendarScroll){
+        const target=selected.offsetLeft - (calendarScroll.clientWidth/2) + (selected.clientWidth/2);
+        calendarScroll.scrollTo({left:Math.max(0,target),behavior:'smooth'});
+      }
+    });
+  }
+}
+
+function openDrawer(){app.classList.add('drawer-open')}
+function closeDrawer(){
+  app.classList.remove('drawer-open');
+  if(window.innerWidth<1024 && lastDrawerTrigger) lastDrawerTrigger.focus();
+}
+
+function showDetail(e,trigger){
+  lastDrawerTrigger=trigger || document.activeElement;
+  document.getElementById('empty').style.display='none';
+  document.getElementById('detail').classList.add('open');
+  openDrawer();
+
+  const cat=document.getElementById('dCat');
+  cat.textContent=e.category;
+  cat.style.background=e.color;
+
+  document.getElementById('dTitle').textContent=e.title;
+  document.getElementById('dDate').textContent=fmtRange(e);
+  document.getElementById('dDuration').textContent=durationText(e);
+  document.getElementById('dArea').textContent=e.solutionArea || 'Not specified';
+  document.getElementById('dResourceName').textContent=e.linkLabel || (e.link ? e.title : 'TBD');
+
+  const urlRow=document.getElementById('dUrlRow');
+  const resourceUrl=document.getElementById('dResourceUrl');
+  const actions=document.getElementById('detailActions');
+  const unavailable=document.getElementById('resourceUnavailable');
+  const link=document.getElementById('dLink');
+  const copyButton=document.getElementById('copyLink');
+  const copyFeedback=document.getElementById('copyFeedback');
+
+  copyFeedback.textContent='';
+
+  if(e.link){
+    resourceUrl.textContent=e.link;
+    urlRow.style.display='block';
+    link.href=e.link;
+    actions.style.display='flex';
+    unavailable.hidden=true;
+    copyButton.dataset.link=e.link;
+  }else{
+    resourceUrl.textContent='';
+    urlRow.style.display='none';
+    link.removeAttribute('href');
+    actions.style.display='none';
+    unavailable.hidden=false;
+    copyButton.dataset.link='';
+  }
+
+  if(window.innerWidth<1024){
+    setTimeout(()=>document.getElementById('close').focus(),40);
+  }
+}
+
+function openDayModal(date,hits,trigger){
+  lastFocusedElement=trigger || document.activeElement;
+  dayModalDate.textContent=date.toLocaleDateString(undefined,{
+    weekday:'long',month:'long',day:'numeric',year:'numeric'
+  });
+  dayModalList.innerHTML='';
+
+  hits.forEach(e=>{
+    const b=document.createElement('button');
+    b.type='button';
+    b.className='modal-event';
+    b.style.setProperty('--event',e.color);
+    b.innerHTML=`<strong>${escapeHtml(e.title)}</strong><span>${escapeHtml(e.category)} · ${escapeHtml(e.solutionArea || 'Not specified')}</span>`;
+    b.onclick=()=>{
+      closeDayModal(false);
+      showDetail(e,trigger);
+    };
+    dayModalList.appendChild(b);
+  });
+
+  dayModalBackdrop.classList.add('open');
+  dayModalBackdrop.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>dayModal.focus(),20);
+}
+
+function closeDayModal(restoreFocus=true){
+  dayModalBackdrop.classList.remove('open');
+  dayModalBackdrop.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+  if(restoreFocus && lastFocusedElement) lastFocusedElement.focus();
+}
+
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g,c=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+function showToast(message){
+  toast.textContent=message;
+  toast.classList.add('show');
+  clearTimeout(showToast.timer);
+  showToast.timer=setTimeout(()=>toast.classList.remove('show'),1800);
+}
+
+async function copyText(text){
+  if(!text) return;
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch{
+    const ta=document.createElement('textarea');
+    ta.value=text;
+    ta.style.position='fixed';
+    ta.style.opacity='0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+  }
+  document.getElementById('copyFeedback').textContent='Link copied to clipboard.';
+  showToast('Link copied');
+}
+
+function moveMonth(delta){
+  state.month+=delta;
+  while(state.month<0){state.month+=12;state.year--}
+  while(state.month>11){state.month-=12;state.year++}
+  state.selectedDate=new Date(state.year,state.month,1);
+  render();
+}
+
+document.getElementById('prev').onclick=()=>moveMonth(-1);
+document.getElementById('next').onclick=()=>moveMonth(1);
+
+document.getElementById('today').onclick=()=>{
+  const n=new Date();
+  state.year=n.getFullYear();
+  state.month=n.getMonth();
+  state.selectedDate=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+  render();
+};
+
+document.getElementById('allOn').onclick=()=>{
+  state.active=new Set(Object.keys(categoryColors));
+  renderMetrics();render();
+};
+document.getElementById('allOff').onclick=()=>{
+  state.active.clear();
+  renderMetrics();render();
+};
+
+searchInput.addEventListener('input',e=>{
+  state.query=e.target.value;
+  searchClear.hidden=!state.query;
+  render();
+});
+searchClear.onclick=()=>{
+  state.query='';
+  searchInput.value='';
+  searchClear.hidden=true;
+  searchInput.focus();
+  render();
+};
+
+solutionFilter.addEventListener('change',e=>{
+  state.solutionArea=e.target.value;
+  render();
+});
+
+document.getElementById('close').onclick=closeDrawer;
+document.getElementById('copyLink').onclick=e=>copyText(e.currentTarget.dataset.link);
+document.getElementById('dayModalClose').onclick=()=>closeDayModal();
+
+dayModalBackdrop.addEventListener('click',e=>{
+  if(e.target===dayModalBackdrop) closeDayModal();
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(dayModalBackdrop.classList.contains('open')) closeDayModal();
+    else if(app.classList.contains('drawer-open')) closeDrawer();
+  }
+
+  if(e.key==='Tab' && dayModalBackdrop.classList.contains('open')){
+    const focusable=[...dayModal.querySelectorAll('button,[href],input,select,[tabindex]:not([tabindex="-1"])')]
+      .filter(el=>!el.disabled && el.offsetParent!==null);
+    if(!focusable.length) return;
+    const first=focusable[0],last=focusable[focusable.length-1];
+    if(e.shiftKey && document.activeElement===first){
+      e.preventDefault();last.focus();
+    }else if(!e.shiftKey && document.activeElement===last){
+      e.preventDefault();first.focus();
+    }
+  }
+});
+
+window.addEventListener('resize',()=>{
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(()=>{
+    render();
+    if(window.innerWidth>=1024 && !app.classList.contains('drawer-open')){
+      // remain closed until an event is explicitly selected
+    }
+  },120);
+});
+
+buildSolutionFilter();
+renderMetrics();
+render();
+</script>
+</body>
+</html>
